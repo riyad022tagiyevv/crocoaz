@@ -38,9 +38,9 @@ def setup_logger():
 
 def help(update, context):
     update.message.reply_text('Mövcud əmrlər:\n' +
-                              '/basla - Yeni oyun başladmaq\n' +
-                              '/master - Aparıcı olmaq\n' +
-                              '/rating - Qrup üzrə reytinq', reply_to_message_id=True)
+                              '/oyun - Yeni oyun başladmağ\n' +
+                              '/aparıcı - Aparıcı olmağ üçün\n' +
+                              '/grup - Qrup üzrə reytinq', reply_to_message_id=True)
 
 
 def button(update, context):
@@ -66,10 +66,10 @@ def button(update, context):
 def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
-        addme = InlineKeyboardButton(text="🧚 Qrupa əlavə edin!", url="https://t.me/wordsazebot?startgroup=a")
-        sohbet = InlineKeyboardButton(text="💬 Söhbət Qrupumuz", url="https://t.me/grand_villa")
-        oyun = InlineKeyboardButton(text="👾 Oyun Qrupumuz", url="https://t.me/grand_villa")
-        admin = InlineKeyboardButton(text="👨🏻‍💻 Sahib", url="https://t.me/aykhan_s")
+        addme = InlineKeyboardButton(text="😴 Qrupa əlavə edin!", url="https://t.me/nemesiscrocodilebot?startgroup=a")
+        sohbet = InlineKeyboardButton(text="💬 Söhbət Qrupum", url="https://t.me/nemesischat")
+        oyun = InlineKeyboardButton(text="⚜️ Oyun Qrupum", url="https://t.me/nemesischat")
+        admin = InlineKeyboardButton(text="🐊 Sahib", url="https://t.me/rowlyn")
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -79,7 +79,7 @@ def command_start(update, context: CallbackContext):
         user_id = update.message.from_user.id
         username = update.message.from_user.full_name
 
-        logger.info('Got command /basla,'
+        logger.info('Got command /oyun,'
                     'chat_id={},'
                     'user_id'.format(chat_id,
                                      user_id))
@@ -87,7 +87,7 @@ def command_start(update, context: CallbackContext):
         game = get_or_create_game(chat_id)
         game.start()
 
-        update.message.reply_text('Söz Oyunu Başladı✨'.format(username), reply_to_message_id=True)
+        update.message.reply_text('Söz Oyunu Başladı⚡'.format(username), reply_to_message_id=True)
 
         set_master(update, context)
 
@@ -104,16 +104,16 @@ def set_master(update, context):
 
     game.set_master(update.message.from_user.id)
 
-    show_word_btn = InlineKeyboardButton("👻Sözə bax", callback_data='show_word')
-    change_word_btn = InlineKeyboardButton("♻️Sözü dəyiş", callback_data='change_word')
+    show_word_btn = InlineKeyboardButton("𝐒𝐎𝐙𝐄 𝐁𝐀𝐗𝐌𝐀𝐆 𝐔𝐂𝐔𝐍 𝐓𝐎𝐗𝐔𝐍🎭", callback_data='show_word')
+    change_word_btn = InlineKeyboardButton("𝐒𝐎𝐙𝐔 𝐃𝐄𝐘𝐈𝐒𝐃𝐈𝐑🌀", callback_data='change_word')
 
     keyboard = [[show_word_btn], [change_word_btn]]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    update.message.reply_text('[{}](tg://user?id={}) sözü başa salır'.format(username,user_id), reply_to_message_id=True, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
+    update.message.reply_text('[{}](tg://user?id={}) 𝐒𝐎𝐙𝐔 𝐁𝐀𝐒̧𝐀 𝐒𝐀𝐋𝐈𝐑'.format(username,user_id), reply_to_message_id=True, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
 
 
-def command_master(update: Update, context):
+def command_aparıcı(update: Update, context):
     chat_id = update.message.chat.id
     game = get_or_create_game(chat_id)
     username = update.message.from_user.full_name
@@ -122,12 +122,12 @@ def command_master(update: Update, context):
     if not game.is_game_started():
         return
 
-    if not game.is_master_time_left():
-        update.message.reply_text('Aparıcı olmaq üçün {} saniyə qalıb'.format(game.get_master_time_left()),
+    if not game.is_aparıcı_time_left():
+        update.message.reply_text('𝐀𝐏𝐀𝐑𝐈𝐂𝐈 𝐎𝐋𝐌𝐀𝐆 𝐔̈𝐂̧𝐔̈𝐍 {} 𝐒𝐀𝐍𝐈̇𝐘𝐄 𝐐𝐀𝐋𝐈𝐁'.format(game.get_aparıcı_time_left()),
                                   reply_to_message_id=True)
         return
 
-    logger.info('Got command /master,'
+    logger.info('Got command /aparıcı,'
                 'chat_id={},'
                 'user="{}"({}),'
                 'timedelta={}'.format(chat_id,
@@ -186,12 +186,12 @@ def command_rating(update, context):
 
     rating_str = game.get_str_rating()
 
-    logger.info('Got command /rating,'
+    logger.info('Got command /grub,'
                 'chat_id={},'
-                'rating={}'.format(update.message.chat.id,
-                                   rating_str))
+                'grub={}'.format(update.message.chat.id,
+                                   grub_str))
 
-    update.message.reply_text(rating_str, reply_to_message_id=True)
+    update.message.reply_text(grub_str, reply_to_message_id=True)
 
 
 def is_word_answered(update, context):
@@ -205,9 +205,9 @@ def is_word_answered(update, context):
     word = game.get_current_word()
 
     if game.is_word_answered(user_id, text):
-        update.message.reply_text('*{}* sözünü [{}](tg://user?id={}) tapdı✅'.format(word, username,user_id), reply_to_message_id=True, parse_mode=ParseMode.MARKDOWN)
+        update.message.reply_text('*{}* 𝐒𝐎𝐙𝐔𝐍𝐔 [{}](tg://user?id={}) 𝐓𝐀𝐏𝐃𝐈✅'.format(word, username,user_id), reply_to_message_id=True, parse_mode=ParseMode.MARKDOWN)
 
-        game.update_rating(user_id, username)
+        game.update_grub(user_id, username)
 
         set_master(update, context)
 
@@ -233,11 +233,11 @@ def main():
 
     dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler("basla", command_start))
-    dp.add_handler(CommandHandler("master", command_master))
+    dp.add_handler(CommandHandler("oyun", command_start))
+    dp.add_handler(CommandHandler("aparıcı", command_master))
     dp.add_handler(CommandHandler("show_word", command_show_word))
     dp.add_handler(CommandHandler("change_word", command_change_word))
-    dp.add_handler(CommandHandler("rating", command_rating))
+    dp.add_handler(CommandHandler("grub", command_rating))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("start", command_start))
 
