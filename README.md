@@ -1,21 +1,8 @@
-# Aykhan026
-Söz oyunu. 7000-dən çox söz ilə
+# 𝐑𝐎𝐖𝐋𝐘𝐍
+𝐒𝐎𝐙𝐔 𝐓𝐀𝐏 𝐎𝐘𝐍𝐀𝐌𝐀𝐆 𝐔𝐂𝐔𝐍 𝐁𝐎𝐓
 
-# Qurulum
-
-# Heroku
-əlavə olunacaq
+# 𝐐𝐔𝐑𝐔𝐋𝐔𝐌 𝐇𝐄𝐑𝐎𝐊𝐔𝐘𝐀 𝐃𝐄𝐏𝐋𝐎𝐘
 
 
-# Server
-
-Əvvəlcə `settings.py` faylında `TOKEN` qarşısına öz Bot Token yazın. Server'da Python (3+) və pip qurulu olmalıdı
-
-1
-`git clone https://github.com/aykhan026/OyunBotTest`
-
-2
-`pip3 install -r requirements.txt`
-
-3
-`python3 main.py`
+𝐇𝐄𝐑𝐎𝐊𝐔𝐘𝐀 𝐃𝐄𝐏𝐋𝐎𝐘 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RowLyn/NemesisCrocodileBot)
