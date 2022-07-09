@@ -66,14 +66,14 @@ def button(update, context):
 def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
-        addme = InlineKeyboardButton(text="😴 Qrupa əlavə edin!", url="https://t.me/nemesiscrocodilebot?startgroup=a")
+        addme = InlineKeyboardButton(text="😴 Qrupa əlavə edin!", url="https://t.me/nemesisgamebot?startgroup=a")
         sohbet = InlineKeyboardButton(text="💬 Söhbət Qrupum", url="https://t.me/nemesischat")
         oyun = InlineKeyboardButton(text="⚜️ Oyun Qrupum", url="https://t.me/nemesischat")
         admin = InlineKeyboardButton(text="🐊 Sahib", url="https://t.me/rowlyn")
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        update.message.reply_text('🇦🇿Şəxsidə oyun olmaz!', reply_to_message_id=True, reply_markup=reply_markup)
+        update.message.reply_text('Şəxsi Söhbetde Oyun Oynaya Bilmerem🌀', reply_to_message_id=True, reply_markup=reply_markup)
     else:
         chat_id = update.message.chat.id
         user_id = update.message.from_user.id
@@ -104,8 +104,8 @@ def set_master(update, context):
 
     game.set_master(update.message.from_user.id)
 
-    show_word_btn = InlineKeyboardButton("𝐒𝐎𝐙𝐄 𝐁𝐀𝐗𝐌𝐀𝐆 𝐔𝐂𝐔𝐍 𝐓𝐎𝐗𝐔𝐍🎭", callback_data='show_word')
-    change_word_btn = InlineKeyboardButton("𝐒𝐎𝐙𝐔 𝐃𝐄𝐘𝐈𝐒𝐃𝐈𝐑🌀", callback_data='change_word')
+    show_word_btn = InlineKeyboardButton("𝐒𝐎𝐙𝐄 𝐁𝐀𝐗𝐌𝐀𝐆 𝐔𝐂𝐔𝐍 𝐓𝐎𝐗𝐔𝐍✅", callback_data='show_word')
+    change_word_btn = InlineKeyboardButton("𝐒𝐎𝐙𝐔 𝐃𝐄𝐘𝐈𝐒𝐃𝐈𝐑♻️", callback_data='change_word')
 
     keyboard = [[show_word_btn], [change_word_btn]]
     reply_markup = InlineKeyboardMarkup(keyboard)
