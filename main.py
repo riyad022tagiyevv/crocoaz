@@ -39,8 +39,8 @@ def setup_logger():
 def help(update, context):
     update.message.reply_text('Mövcud əmrlər:\n' +
                               '/oyun - Yeni oyun başladmağ\n' +
-                              '/aparıcı - Aparıcı olmağ üçün\n' +
-                              '/grup - Qrup üzrə reytinq', reply_to_message_id=True)
+                              '/master - Aparıcı olmağ üçün\n' +
+                              '/rating - Qrup üzrə reytinq', reply_to_message_id=True)
 
 
 def button(update, context):
@@ -113,7 +113,7 @@ def set_master(update, context):
     update.message.reply_text('[{}](tg://user?id={}) 𝐒𝐎𝐙𝐔 𝐁𝐀𝐒̧𝐀 𝐒𝐀𝐋𝐈𝐑'.format(username,user_id), reply_to_message_id=True, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
 
 
-def command_aparıcı(update: Update, context):
+def command_master(update: Update, context):
     chat_id = update.message.chat.id
     game = get_or_create_game(chat_id)
     username = update.message.from_user.full_name
@@ -122,12 +122,12 @@ def command_aparıcı(update: Update, context):
     if not game.is_game_started():
         return
 
-    if not game.is_aparıcı_time_left():
-        update.message.reply_text('𝐀𝐏𝐀𝐑𝐈𝐂𝐈 𝐎𝐋𝐌𝐀𝐆 𝐔̈𝐂̧𝐔̈𝐍 {} 𝐒𝐀𝐍𝐈̇𝐘𝐄 𝐐𝐀𝐋𝐈𝐁'.format(game.get_aparıcı_time_left()),
+    if not game.is_master_time_left():
+        update.message.reply_text('𝐀𝐏𝐀𝐑𝐈𝐂𝐈 𝐎𝐋𝐌𝐀𝐆 𝐔̈𝐂̧𝐔̈𝐍 {} 𝐒𝐀𝐍𝐈̇𝐘𝐄 𝐐𝐀𝐋𝐈𝐁'.format(game.get_master_time_left()),
                                   reply_to_message_id=True)
         return
 
-    logger.info('Got command /aparıcı,'
+    logger.info('Got command /master,'
                 'chat_id={},'
                 'user="{}"({}),'
                 'timedelta={}'.format(chat_id,
@@ -186,7 +186,7 @@ def command_rating(update, context):
 
     rating_str = game.get_str_rating()
 
-    logger.info('Got command /grub,'
+    logger.info('Got command /rating,'
                 'chat_id={},'
                 'grub={}'.format(update.message.chat.id,
                                    grub_str))
@@ -234,10 +234,10 @@ def main():
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("oyun", command_start))
-    dp.add_handler(CommandHandler("aparıcı", command_aparıcı))
+    dp.add_handler(CommandHandler("master", command_master))
     dp.add_handler(CommandHandler("show_word", command_show_word))
     dp.add_handler(CommandHandler("change_word", command_change_word))
-    dp.add_handler(CommandHandler("grub", command_grub))
+    dp.add_handler(CommandHandler("rating", command_rating))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("start", command_start))
 
